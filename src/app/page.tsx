@@ -46,7 +46,7 @@ const PROJECTS = [
 ];
 
 /* ========== PAGE ========== */
-export default function Page(): JSX.Element {
+export default function Page() {
   return (
     <main className="min-h-screen bg-[#071028] text-white antialiased">
       <Header />
@@ -62,7 +62,7 @@ export default function Page(): JSX.Element {
 }
 
 /* ========== Header ========== */
-function Header(): JSX.Element {
+function Header() {
   return (
     <header className="bg-[#071227]/90 border-b border-gray-800 sticky top-0 z-50">
       <div className="max-w-6xl mx-auto flex items-center justify-between px-6 py-4">
@@ -86,7 +86,7 @@ function Header(): JSX.Element {
 }
 
 /* ========== Hero ========== */
-function Hero(): JSX.Element {
+function Hero() {
   return (
     <section id="home" className="max-w-6xl mx-auto px-6 py-20 md:py-24">
       <div className="flex flex-col md:flex-row items-center gap-10">
@@ -117,7 +117,7 @@ function Hero(): JSX.Element {
 }
 
 /* ========== About ========== */
-function AboutSection(): JSX.Element {
+function AboutSection() {
   return (
     <section id="about" className="max-w-6xl mx-auto px-6 py-12">
       <h2 className="text-3xl font-bold text-[#38bdf8] mb-6">About Me</h2>
@@ -157,7 +157,7 @@ function AboutSection(): JSX.Element {
 }
 
 /* ========== BadgeIcon (accurate, no-bg, original colors, larger) ========== */
-function BadgeIcon({ name }: { name: string }): JSX.Element {
+function BadgeIcon({ name }: { name: string }) {
   const svgClass = "w-10 h-10 flex-shrink-0"; // besar & jelas
   switch (name) {
     case "JavaScript":
@@ -223,7 +223,7 @@ function BadgeIcon({ name }: { name: string }): JSX.Element {
 }
 
 /* ========== Projects carousel ========== */
-function ProjectsCarousel(): JSX.Element {
+function ProjectsCarousel() {
   const scrollerRef = useRef<HTMLDivElement | null>(null);
   const autoplayRef = useRef<number | null>(null);
   const [isHovering, setIsHovering] = useState(false);
@@ -323,7 +323,7 @@ function ProjectsCarousel(): JSX.Element {
 }
 
 /* ========== Contact ========== */
-function ContactSection(): JSX.Element {
+function ContactSection() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
@@ -371,7 +371,7 @@ function ContactSection(): JSX.Element {
 }
 
 /* ========== ContactBtn & icons (bigger) ========== */
-function ContactBtn({ href, label, icon }: { href: string; label: string; icon: React.ReactNode }): JSX.Element {
+function ContactBtn({ href, label, icon }: { href: string; label: string; icon: React.ReactNode }) {
   return (
     <a href={href} target="_blank" rel="noreferrer" className="flex items-center gap-3 px-4 py-3 rounded-xl bg-[#071826] border border-gray-800/50 hover:bg-[#0e1a2b] transition text-gray-200 font-medium" aria-label={label}>
       <span className="w-8 h-8">{icon}</span>
@@ -380,7 +380,7 @@ function ContactBtn({ href, label, icon }: { href: string; label: string; icon: 
   );
 }
 
-function MailIcon(): JSX.Element {
+function MailIcon() {
   return (
     <svg viewBox="0 0 24 24" className="w-8 h-8" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
       <rect x="2" y="5" width="20" height="14" rx="2" stroke="#60a5fa" strokeWidth="1.6" />
@@ -389,7 +389,7 @@ function MailIcon(): JSX.Element {
   );
 }
 
-function WhatsAppIcon(): JSX.Element {
+function WhatsAppIcon() {
   return (
     <svg viewBox="0 0 24 24" className="w-8 h-8" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
       <path d="M21 12.1a9 9 0 1 0-1.7 5.1L21 21l-2.8-1.4A9 9 0 0 0 21 12.1z" stroke="#34d399" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
@@ -398,7 +398,7 @@ function WhatsAppIcon(): JSX.Element {
   );
 }
 
-function LinkedInIcon(): JSX.Element {
+function LinkedInIcon() {
   return (
     <svg viewBox="0 0 24 24" className="w-8 h-8" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
       <rect x="2" y="3" width="20" height="18" rx="2" stroke="#60a5fa" strokeWidth="1.4" />
@@ -407,7 +407,7 @@ function LinkedInIcon(): JSX.Element {
   );
 }
 
-function GitHubIcon(): JSX.Element {
+function GitHubIcon() {
   return (
     <svg viewBox="0 0 24 24" className="w-8 h-8 text-white" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden>
       <path d="M12 .5A12 12 0 001.9 18.3c.4.1.6-.2.6-.4v-1.5c-2.4.5-3-1.1-3-1.1-.4-1 .1-1 .1-1 1 .1 1.6 1 1.6 1 .9 1.6 2.4 1.1 3 .9.1-.7.4-1.2.7-1.5-2.6-.3-5.4-1.3-5.4-6 0-1.3.5-2.3 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11 11 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.7.2 2.9.1 3.2.8.9 1.2 1.9 1.2 3.2 0 4.7-2.8 5.7-5.5 6 .4.4.7 1 .7 2.1v3.1c0 .3.2.7.8.6A12 12 0 0 0 12 .5z" />
