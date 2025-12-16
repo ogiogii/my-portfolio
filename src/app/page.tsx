@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import FullBodyPhoto from "../components/FullBodyPhoto";
+import CareerTimeline from "@/components/CareerTimeline";
 
 
 /* eslint-disable @next/next/no-img-element */
@@ -55,7 +56,7 @@ export default function Page() {
       <Header />
       <Hero />
       <AboutSection />
-       {/* FOTO FULL BODY */}
+      <CareerTimeline />
       <FullBodyPhoto />
       <ProjectsCarousel />
       <ContactSection />
