@@ -14,7 +14,7 @@ export default function CareerTimeline() {
     >
       {/* ===== HEADER ===== */}
       <div className="mx-auto max-w-3xl text-center py-24 px-6">
-        <h2 className="text-4xl font-semibold text-gray-900">
+        <h2 className="text-4xl font-semibold text-white-900">
           Perjalanan{" "}
           <span className="bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
             Karir
@@ -41,7 +41,7 @@ export default function CareerTimeline() {
             <span className="inline-block rounded-full bg-purple-100 px-4 py-1 text-xs font-medium text-purple-600">
               2024
             </span>
-            <h3 className="mt-3 text-lg font-semibold text-gray-900">
+            <h3 className="mt-3 text-lg font-semibold text-white-900">
               Mulai Belajar Programming
             </h3>
             <p className="mt-2 text-sm text-gray-600">
@@ -60,7 +60,7 @@ export default function CareerTimeline() {
             <span className="inline-block rounded-full bg-pink-100 px-4 py-1 text-xs font-medium text-pink-600">
               2025
             </span>
-            <h3 className="mt-3 text-lg font-semibold text-gray-900">
+            <h3 className="mt-3 text-lg font-semibold text-white-900">
               Membangun Project
             </h3>
             <p className="mt-2 text-sm text-gray-600">
@@ -78,7 +78,7 @@ export default function CareerTimeline() {
             <span className="inline-block rounded-full bg-purple-100 px-4 py-1 text-xs font-medium text-purple-600">
               Selanjutnya
             </span>
-            <h3 className="mt-3 text-lg font-semibold text-gray-900">
+            <h3 className="mt-3 text-lg font-semibold text-white-900">
               Berkembang & Konsisten
             </h3>
             <p className="mt-2 text-sm text-gray-600">
