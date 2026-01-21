@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import useScrollReveal from "@/hooks/useScrollReveal";
 
 export default function FullBodyPhoto() {
@@ -8,52 +9,52 @@ export default function FullBodyPhoto() {
   return (
     <section
       ref={ref}
-      className={`py-24 px-6 transition-all duration-700 ${
-        visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+      className={`py-28 px-6 transition-all duration-700 ${
+        visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
       }`}
     >
-      <div className="mx-auto max-w-4xl">
-        {/* QUOTE CARD */}
-        <div className="relative bg-white rounded-3xl shadow-2xl px-8 py-16 text-center">
-          {/* ICON KUTIP */}
-          <div className="absolute -top-6 left-1/2 -translate-x-1/2">
-            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-purple-100">
-              <span className="text-3xl font-bold text-purple-500">“</span>
+      <div className="mx-auto max-w-md">
+        {/* ELECTRIC CARD */}
+        <div className="electric-card relative rounded-3xl p-[2px]">
+          <div className="electric-card-inner relative rounded-3xl px-8 py-14 text-center">
+            {/* BADGE */}
+            <span className="inline-block mb-4 rounded-full bg-white/10 px-3 py-1 text-xs tracking-wider text-cyan-300">
+              FEATURED
+            </span>
+
+            {/* TITLE */}
+            <h2 className="text-2xl font-semibold text-white">
+              Electric Card
+            </h2>
+
+            {/* SUBTITLE */}
+            <p className="mt-3 text-sm leading-relaxed text-gray-300">
+              Setiap error memberi pelajaran, setiap solusi membentuk
+              developer yang lebih kuat.
+            </p>
+
+            {/* AVATAR */}
+            <div className="mt-8 flex justify-center">
+              <div className="electric-avatar">
+                <Image
+                  src="/images/foto.jpg"
+                  alt="Foto Saya"
+                  width={96}
+                  height={96}
+                  className="rounded-full object-cover"
+                  priority
+                />
+              </div>
             </div>
-          </div>
 
-          {/* FOTO DI DALAM KARTU */}
-          <div className="flex justify-center mt-4">
-            <img
-              src="/images/foto.jpg"
-              alt="Foto Saya"
-              className="
-                w-28
-                h-28
-                object-cover
-                rounded-full
-                ring-4
-                ring-purple-200
-                shadow-lg
-              "
-            />
-          </div>
-
-          {/* QUOTE */}
-          <p className="mt-8 text-lg sm:text-xl leading-relaxed text-gray-800">
-            Setiap error memberi pelajaran, setiap solusi menjadi pencapaian dalam{" "}
-            <span className="bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent font-medium">
-              perjalanan panjang menjadi developer lebih baik.
-            </span>
-          </p>
-
-          {/* FOOTER */}
-          <div className="mt-10 flex items-center justify-center gap-4">
-            <span className="h-px w-10 bg-gray-300" />
-            <span className="text-xs tracking-widest text-gray-500">
-              TERUS BELAJAR, TERUS BERKEMBANG
-            </span>
-            <span className="h-px w-10 bg-gray-300" />
+            {/* FOOTER */}
+            <div className="mt-10 flex items-center justify-center gap-3">
+              <span className="h-px w-8 bg-white/20" />
+              <span className="text-[10px] tracking-widest text-gray-400">
+                KEEP EVOLVING
+              </span>
+              <span className="h-px w-8 bg-white/20" />
+            </div>
           </div>
         </div>
       </div>
