@@ -3,6 +3,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import FullBodyPhoto from "../components/FullBodyPhoto";
 import CareerTimeline from "@/components/CareerTimeline";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 
 
 /* eslint-disable @next/next/no-img-element */
@@ -27,8 +28,8 @@ const PROJECTS = [
     title: "Magang – Iventory",
     image: "/inventory.jpg",
     desc:
-      ".",
-    repo: "#",
+      "Sistem manajemen stok barang menggunakan Laravel & MySQL",
+    repo: "https://github.com/ogiogii/Inventory.git",
     demo: "#",
   },
   {
@@ -93,31 +94,69 @@ function Header() {
   );
 }
 
-/* ========== Hero ========== */
+/* ========== Hero (Update with CV Download) ========== */
 function Hero() {
+  const [showCVOptions, setShowCVOptions] = useState(false);
+
   return (
     <section id="home" className="max-w-6xl mx-auto px-6 py-20 md:py-24">
       <div className="flex flex-col md:flex-row items-center gap-10">
         <div className="md:w-2/3 text-left">
           <h2 className="text-5xl md:text-6xl font-bold mb-3 leading-tight">
-            Hi, I&apos;m a <span className="text-[#38bdf8] font-extrabold">{PROFILE.name.split(" ")[0]}</span> 👋 
+            Hi, I&apos;m <span className="text-[#38bdf8] font-extrabold">{PROFILE.name.split(" ")[0]}</span> 👋 
           </h2>
-          <h3 className="text-5xl md:text-6xl font-bold mb-3 leading-tight"> Web Developer</h3>
-          <h3 className="text-2xl font-semibold text-gray-300 mb-6"></h3>
-          <p className="text-gray-400 leading-relaxed max-w-2xl mb-8 font-medium">{PROFILE.aboutShort}</p>
+          <h3 className="text-5xl md:text-6xl font-bold mb-3 leading-tight text-white/90"> Web Developer</h3>
+          <p className="text-gray-400 leading-relaxed max-w-2xl mb-8 font-medium">
+            {PROFILE.aboutShort}
+          </p>
 
-          <div className="flex gap-4">
-            <a href="#projects" className="bg-[#38bdf8] text-[#071227] font-bold px-6 py-3 rounded-md hover:bg-[#0ea5e9] transition">Lihat Projects</a>
-            <a href="#contact" className="border border-gray-700 text-gray-300 font-semibold px-6 py-3 rounded-md hover:bg-gray-800 transition">Hubungi Saya</a>
+          <div className="flex flex-wrap gap-4">
+            {/* Tombol Lihat Project */}
+            <a href="#projects" className="bg-[#38bdf8] text-[#071227] font-bold px-6 py-3 rounded-md hover:bg-[#0ea5e9] transition shadow-lg shadow-sky-500/20">
+              Lihat Projects
+            </a>
+
+            {/* Tombol Dropdown CV */}
+            <div className="relative">
+              <button 
+                onClick={() => setShowCVOptions(!showCVOptions)}
+                className="border border-[#38bdf8] text-[#38bdf8] font-bold px-6 py-3 rounded-md hover:bg-[#38bdf8]/10 transition flex items-center gap-2"
+              >
+                Download CV 
+                <svg className={`w-4 h-4 transition-transform ${showCVOptions ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
+              </button>
+
+              {showCVOptions && (
+                <div className="absolute top-full mt-2 w-48 bg-[#0f172a] border border-gray-700 rounded-lg shadow-xl overflow-hidden z-[60]">
+                  <a 
+                    href="/CV_Yhogi_Riswandi.NEW.pdf" 
+                    target="_blank" 
+                    className="block px-4 py-3 text-sm text-gray-200 hover:bg-gray-800 border-b border-gray-700 flex items-center gap-2"
+                  >
+                    <span className="text-red-400 font-bold text-xs uppercase">PDF</span> Lihat / Download
+                  </a>
+                  <a 
+                    href="/CV_Yhogi_Riswandi.NEW.docx" 
+                    download 
+                    className="block px-4 py-3 text-sm text-gray-200 hover:bg-gray-800 flex items-center gap-2"
+                  >
+                    <span className="text-blue-400 font-bold text-xs uppercase">Word</span> Download DOCX
+                  </a>
+                </div>
+              )}
+            </div>
           </div>
         </div>
 
         <aside className="md:w-1/3 flex flex-col items-center">
-          <img src={PROFILE.profileImage} alt={PROFILE.name} className="w-48 h-48 object-cover rounded-2xl shadow-lg" />
-          <div className="text-center mt-4">
-            <h4 className="font-bold text-lg">{PROFILE.name}</h4>
-            <p className="text-gray-300 text-sm font-medium">{PROFILE.location}</p>
-            <p className="text-gray-300 text-sm mt-1 font-medium">{PROFILE.email} • {PROFILE.phone}</p>
+          <div className="relative group">
+            <div className="absolute -inset-1 bg-gradient-to-r from-[#38bdf8] to-blue-600 rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
+            <img src={PROFILE.profileImage} alt={PROFILE.name} className="relative w-48 h-48 object-cover rounded-2xl shadow-lg" />
+          </div>
+          <div className="text-center mt-6">
+            <h4 className="font-bold text-xl text-white">{PROFILE.name}</h4>
+            <p className="text-[#38bdf8] text-sm font-semibold mb-2">Informatics Engineering</p>
+            <p className="text-gray-400 text-sm font-medium"> </p>
           </div>
         </aside>
       </div>
@@ -256,83 +295,99 @@ function BadgeIcon({ name }: { name: string }) {
   }
 }
 
-/* ========== Projects carousel ========== */
+/* ========== Projects carousel (UPDATE TERBARU) ========== */
 function ProjectsCarousel() {
   const scrollerRef = useRef<HTMLDivElement | null>(null);
-  const autoplayRef = useRef<number | null>(null);
+  const autoplayRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const [isHovering, setIsHovering] = useState(false);
 
-  function scrollNext(): void {
+  // --- TANDA: Fungsi Scroll Otomatis & Manual ---
+  const scrollNext = () => {
+    const el = scrollerRef.current;
+    if (!el) return;
+    
+    // Jika sudah di ujung kanan, balik ke awal
+    const isAtEnd = el.scrollLeft + el.clientWidth >= el.scrollWidth - 10;
+    
+    if (isAtEnd) {
+      el.scrollTo({ left: 0, behavior: "smooth" });
+    } else {
+      const card = el.querySelector<HTMLElement>("[data-card]");
+      const step = card ? card.offsetWidth + 24 : 350;
+      el.scrollBy({ left: step, behavior: "smooth" });
+    }
+  };
+
+  const scrollPrev = () => {
     const el = scrollerRef.current;
     if (!el) return;
     const card = el.querySelector<HTMLElement>("[data-card]");
-    const step = card ? card.offsetWidth + 24 : el.clientWidth / 2;
-    el.scrollBy({ left: step, behavior: "smooth" });
-  }
-  function scrollPrev(): void {
-    const el = scrollerRef.current;
-    if (!el) return;
-    const card = el.querySelector<HTMLElement>("[data-card]");
-    const step = card ? card.offsetWidth + 24 : el.clientWidth / 2;
+    const step = card ? card.offsetWidth + 24 : 350;
     el.scrollBy({ left: -step, behavior: "smooth" });
-  }
+  };
 
+  // --- TANDA: Logic Timer (Auto Scroll) ---
   useEffect(() => {
-    function start() {
-      stop();
-      autoplayRef.current = window.setInterval(() => {
-        const el = scrollerRef.current;
-        if (!el) return;
-        if (el.scrollLeft + el.clientWidth >= el.scrollWidth - 10) {
-          el.scrollTo({ left: 0, behavior: "smooth" });
-        } else {
-          scrollNext();
-        }
-      }, 3000);
-    }
-    function stop() {
-      if (autoplayRef.current) {
-        window.clearInterval(autoplayRef.current);
-        autoplayRef.current = null;
-      }
+    if (!isHovering) {
+      autoplayRef.current = setInterval(() => {
+        scrollNext();
+      }, 3000); // Jalan otomatis tiap 3 detik
+    } else {
+      if (autoplayRef.current) clearInterval(autoplayRef.current);
     }
 
-    if (!isHovering) start();
-    else stop();
-
-    return () => stop();
+    return () => {
+      if (autoplayRef.current) clearInterval(autoplayRef.current);
+    };
   }, [isHovering]);
 
   return (
-    <section id="projects" className="max-w-6xl mx-auto px-6 py-12">
-      <div className="flex items-center justify-between mb-6">
-        <h2 className="text-3xl font-bold text-[#38bdf8]">Projects</h2>
-        <div className="flex gap-2">
-          <button aria-label="previous" onClick={scrollPrev} className="bg-[#0b1220] hover:bg-[#0e1a2b] text-gray-200 p-2 rounded-md shadow">◀</button>
-          <button aria-label="next" onClick={scrollNext} className="bg-[#0b1220] hover:bg-[#0e1a2b] text-gray-200 p-2 rounded-md shadow">▶</button>
+    <section id="projects" className="max-w-6xl mx-auto px-6 py-20">
+      <div className="flex justify-between items-end mb-10">
+        <div>
+          <h2 className="text-3xl font-bold text-[#38bdf8] mb-2">Projects</h2>
+          <p className="text-gray-400 font-medium">Koleksi proyek pengembangan web terbaru saya.</p>
+        </div>
+        <div className="flex gap-3">
+          <button onClick={scrollPrev} className="p-3 rounded-full border border-gray-700 hover:bg-gray-800 transition active:scale-90">
+            <ArrowLeft size={20} />
+          </button>
+          <button onClick={scrollNext} className="p-3 rounded-full border border-gray-700 hover:bg-gray-800 transition active:scale-90">
+            <ArrowRight size={20} />
+          </button>
         </div>
       </div>
 
-      <div
+      {/* --- TANDA: Area Hover Detector --- */}
+      <div 
         ref={scrollerRef}
-        onMouseEnter={() => setIsHovering(true)}
-        onMouseLeave={() => setIsHovering(false)}
-        className="relative flex gap-6 overflow-x-auto pb-4 scroll-smooth no-scrollbar"
-        style={{ scrollSnapType: "x mandatory", WebkitOverflowScrolling: "touch" }}
+        onMouseEnter={() => setIsHovering(true)} // Berhenti saat mouse nempel
+        onMouseLeave={() => setIsHovering(false)} // Jalan lagi saat mouse lepas
+        className="flex gap-6 overflow-x-auto scrollbar-hide snap-x snap-mandatory pb-4"
+        style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
       >
-        {PROJECTS.map((p) => (
-          <article key={p.id} data-card className="flex-shrink-0 w-[320px] sm:w-[380px] md:w-[460px] rounded-2xl overflow-hidden shadow-lg bg-[#071022] relative" style={{ scrollSnapAlign: "start" }}>
-            <div className="w-full h-56 md:h-64 relative">
-              <img src={p.image} alt={p.title} className="w-full h-full object-cover" draggable={false} />
-              <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-black/70 to-transparent flex items-end p-4">
-                <h3 className="text-white text-lg font-semibold drop-shadow-md">{p.title}</h3>
+        {PROJECTS.map((project) => (
+          <div 
+            key={project.id} 
+            data-card
+            className="min-w-[300px] md:min-w-[400px] bg-[#071428] border border-gray-800 rounded-2xl overflow-hidden snap-start group cursor-pointer transition-all duration-300 hover:border-[#38bdf8]/50"
+          >
+            <div className="relative h-52 overflow-hidden">
+              <img 
+                src={project.image} 
+                alt={project.title} 
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
+              />
+            </div>
+            <div className="p-6">
+              <h3 className="text-xl font-bold mb-2 group-hover:text-[#38bdf8] transition-colors">{project.title}</h3>
+              <p className="text-gray-400 text-sm mb-4 line-clamp-2">{project.desc}</p>
+              <div className="flex gap-4 items-center">
+                <a href={project.repo} target="_blank" rel="noopener noreferrer" className="text-xs font-bold text-[#38bdf8] hover:underline">GitHub</a>
+                <a href={project.demo} target="_blank" rel="noopener noreferrer" className="text-xs font-bold text-gray-400 hover:underline">Live Demo</a>
               </div>
             </div>
-
-            <div className="p-4 bg-transparent text-gray-300">
-              <p className="text-sm line-clamp-3 font-medium">{p.desc}</p>
-            </div>
-          </article>
+          </div>
         ))}
       </div>
     </section>
