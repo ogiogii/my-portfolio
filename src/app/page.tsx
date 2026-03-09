@@ -3,7 +3,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import FullBodyPhoto from "../components/FullBodyPhoto";
 import CareerTimeline from "@/components/CareerTimeline";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { ArrowLeft, ArrowRight, Award, ExternalLink, X } from "lucide-react"; // Tambah icon Award & X
+import { motion, AnimatePresence } from "framer-motion"; // Impor Framer Motion
 
 
 /* eslint-disable @next/next/no-img-element */
@@ -50,6 +51,58 @@ const PROJECTS = [
   },
 ];
 
+const CERTIFICATES = [
+  {
+    id: 1,
+    title: "CCNAv7: Introduction to Networks",
+    issuer: "Cisco Networking Academy",
+    date: "10 Sep 2023",
+    file: "/images/CCNA1.pdf",
+    image:"/images/CCNA1.jpg",
+  },
+  {
+    id: 2,
+    title: "Oracle Java Fundamental",
+    issuer: "Oracle Academy",
+    date: "16 Feb 2024",
+    file: "/images/ORACLEJAVAFUNDAMENTAL.pdf",
+    image:"/images/ORACLEJAVAFUNDAMENTAL.jpg",
+  },
+  {
+    id: 3,
+    title: "Java Programming Certification",
+    issuer: "Training Certification",
+    date: "19 Aug 2024",
+    file: "/images/JAVAPROGRAMMING.pdf",
+    image:"/images/JAVAPROGRAMMING.jpg",
+  },
+  {
+    id: 4,
+    title: "Oracle Database Final Exam",
+    issuer: "Oracle Academy",
+    date: "17 Feb 2024",
+    file: "/images/oracledatabase.pdf",
+    image:"/images/oracledatabase.jpg",
+  },
+  {
+    id: 5,
+    title: "Desktop Application Training (MS Office)",
+    issuer: "Ebiz Education Enterprise",
+    date: "24 Mar 2025",
+    file: "/images/MS-Office.pdf",
+    image:"/images/MS-Office.jpg",
+  },
+  {
+    id: 6,
+    title: "IT Essentials ",
+    issuer: "Cisco Networking Academy",
+    date: "22 Feb 2024",
+    file: "/images/ITESSENSIAL.pdf",
+    image:"/images/ITESSENSIAL.jpg",
+  },
+];
+
+
 /* ========== PAGE ========== */
 export default function Page() {
   return (
@@ -60,6 +113,7 @@ export default function Page() {
       <CareerTimeline />
       <FullBodyPhoto />
       <ProjectsCarousel />
+      <CertificatesSection />
       <ContactSection />
       <footer className="border-t border-gray-800 mt-16 py-8 text-center text-sm text-gray-400 font-medium">
         © {new Date().getFullYear()} {PROFILE.name} — All Rights Reserved.
@@ -127,18 +181,18 @@ function Hero() {
               </button>
 
               {showCVOptions && (
-                <div className="absolute top-full mt-2 w-48 bg-[#0f172a] border border-gray-700 rounded-lg shadow-xl overflow-hidden z-[60]">
+                <div className="absolute top-full mt-2 w-48 bg-[#0f172a] border border-gray-700 rounded-lg shadow-xl overflow-hidden z-60">
                   <a 
                     href="/CV_Yhogi_Riswandi.NEW.pdf" 
                     target="_blank" 
-                    className="block px-4 py-3 text-sm text-gray-200 hover:bg-gray-800 border-b border-gray-700 flex items-center gap-2"
+                    className=" px-4 py-3 text-sm text-gray-200 hover:bg-gray-800 border-b border-gray-700 flex items-center gap-2"
                   >
                     <span className="text-red-400 font-bold text-xs uppercase">PDF</span> Lihat / Download
                   </a>
                   <a 
                     href="/CV_Yhogi_Riswandi.NEW.docx" 
                     download 
-                    className="block px-4 py-3 text-sm text-gray-200 hover:bg-gray-800 flex items-center gap-2"
+                    className=" px-4 py-3 text-sm text-gray-200 hover:bg-gray-800 flex items-center gap-2"
                   >
                     <span className="text-blue-400 font-bold text-xs uppercase">Word</span> Download DOCX
                   </a>
@@ -150,7 +204,7 @@ function Hero() {
 
         <aside className="md:w-1/3 flex flex-col items-center">
           <div className="relative group">
-            <div className="absolute -inset-1 bg-gradient-to-r from-[#38bdf8] to-blue-600 rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
+            <div className="absolute -inset-1 bg-linear-to-r from-[#38bdf8] to-blue-600 rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
             <img src={PROFILE.profileImage} alt={PROFILE.name} className="relative w-48 h-48 object-cover rounded-2xl shadow-lg" />
           </div>
           <div className="text-center mt-6">
@@ -390,6 +444,115 @@ function ProjectsCarousel() {
           </div>
         ))}
       </div>
+    </section>
+  );
+}
+
+function CertificatesSection() {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [preview, setPreview] = useState<string | null>(null);
+
+  const next = () => {
+    setCurrentIndex((prev) =>
+      prev + 2 >= CERTIFICATES.length ? 0 : prev + 2
+    );
+  };
+
+  const prev = () => {
+    setCurrentIndex((prev) =>
+      prev - 2 < 0 ? Math.max(CERTIFICATES.length - 2, 0) : prev - 2
+    );
+  };
+
+  return (
+    <section className="max-w-6xl mx-auto px-6 py-16">
+      <h2 className="text-3xl font-bold text-[#38bdf8] mb-8 flex items-center gap-2">
+        <Award className="w-6 h-6" /> Certificates
+      </h2>
+
+      <div className="relative overflow-hidden">
+
+        {/* SLIDER */}
+        <motion.div
+          className="flex gap-6"
+          animate={{ x: `-${currentIndex * 50}%` }}
+          transition={{ duration: 0.5 }}
+        >
+          {CERTIFICATES.map((cert) => (
+            <div
+              key={cert.id}
+              className="min-w-[50%] bg-[#071428] border border-gray-800 rounded-xl p-4"
+            >
+              <img
+                src={cert.image || "/certificate-placeholder.jpg"}
+                alt={cert.title}
+                width={500}
+                height={300}
+                className="rounded-lg mb-3 cursor-pointer"
+                onClick={() => setPreview(cert.file)}
+                onError={(e) => {
+                  e.currentTarget.src = "/certificate-placeholder.jpg";
+                }}
+              />
+
+              <h3 className="font-semibold text-white">{cert.title}</h3>
+              <p className="text-sm text-gray-400">{cert.issuer}</p>
+              <p className="text-xs text-gray-500 mb-3">{cert.date}</p>
+
+              <a
+                href={cert.file}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#38bdf8] text-sm flex items-center gap-1 hover:underline"
+              >
+                <ExternalLink size={16} /> Open Certificate
+              </a>
+            </div>
+          ))}
+        </motion.div>
+
+        {/* BUTTON */}
+        <button
+          onClick={prev}
+          className="absolute left-0 top-1/2 -translate-y-1/2 bg-black/50 p-2 rounded-full"
+        >
+          <ArrowLeft />
+        </button>
+
+        <button
+          onClick={next}
+          className="absolute right-0 top-1/2 -translate-y-1/2 bg-black/50 p-2 rounded-full"
+        >
+          <ArrowRight />
+        </button>
+      </div>
+
+      {/* MODAL PREVIEW */}
+      <AnimatePresence>
+        {preview && (
+          <motion.div
+            className="fixed inset-0 bg-black/80 flex items-center justify-center z-50"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <div className="relative w-[90%] h-[90%] bg-white rounded-xl overflow-hidden">
+
+              <button
+                onClick={() => setPreview(null)}
+                className="absolute right-4 top-4 bg-black text-white p-2 rounded-full"
+              >
+                <X />
+              </button>
+
+              <iframe
+                src={preview}
+                className="w-full h-full"
+              />
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }
