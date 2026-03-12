@@ -148,25 +148,32 @@ function Header() {
   );
 }
 
-/* ========== Hero (Update with CV Download) ========== */
+/* ========== Hero (Update with CV Dropdown & Refined Image) ========== */
 function Hero() {
   const [showCVOptions, setShowCVOptions] = useState(false);
 
   return (
-    <section id="home" className="max-w-6xl mx-auto px-6 py-20 md:py-24">
-      <div className="flex flex-col md:flex-row items-center gap-10">
-        <div className="md:w-2/3 text-left">
-          <h2 className="text-5xl md:text-6xl font-bold mb-3 leading-tight">
+    <section id="home" className="max-w-6xl mx-auto px-6 py-20 md:py-32">
+      <div className="flex flex-col md:flex-row items-center gap-12">
+        
+        {/* --- TEKS KIRI --- */}
+        <div className="md:w-2/3 text-left order-2 md:order-1">
+          <h2 className="text-5xl md:text-7xl font-bold mb-2 tracking-tight">
             Hi, I&apos;m <span className="text-[#38bdf8] font-extrabold">{PROFILE.name.split(" ")[0]}</span> 👋 
           </h2>
-          <h3 className="text-5xl md:text-6xl font-bold mb-3 leading-tight text-white/90"> Web Developer</h3>
-          <p className="text-gray-400 leading-relaxed max-w-2xl mb-8 font-medium">
+          <h3 className="text-4xl md:text-5xl font-bold mb-6 text-white/80">
+            Web Developer
+          </h3>
+          <p className="text-gray-400 text-lg leading-relaxed max-w-2xl mb-10 font-medium">
             {PROFILE.aboutShort}
           </p>
 
           <div className="flex flex-wrap gap-4">
             {/* Tombol Lihat Project */}
-            <a href="#projects" className="bg-[#38bdf8] text-[#071227] font-bold px-6 py-3 rounded-md hover:bg-[#0ea5e9] transition shadow-lg shadow-sky-500/20">
+            <a 
+              href="#projects" 
+              className="bg-[#38bdf8] text-[#071227] font-bold px-8 py-3 rounded-xl hover:bg-[#0ea5e9] transition-all shadow-lg shadow-sky-500/20 active:scale-95"
+            >
               Lihat Projects
             </a>
 
@@ -174,27 +181,36 @@ function Hero() {
             <div className="relative">
               <button 
                 onClick={() => setShowCVOptions(!showCVOptions)}
-                className="border border-[#38bdf8] text-[#38bdf8] font-bold px-6 py-3 rounded-md hover:bg-[#38bdf8]/10 transition flex items-center gap-2"
+                className="border border-gray-700 text-white font-bold px-8 py-3 rounded-xl hover:border-[#38bdf8] hover:text-[#38bdf8] transition-all flex items-center gap-2 active:scale-95"
               >
                 Download CV 
-                <svg className={`w-4 h-4 transition-transform ${showCVOptions ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
+                <svg 
+                  className={`w-4 h-4 transition-transform duration-300 ${showCVOptions ? 'rotate-180' : ''}`} 
+                  fill="none" 
+                  stroke="currentColor" 
+                  viewBox="0 0 24 24"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
               </button>
 
               {showCVOptions && (
-                <div className="absolute top-full mt-2 w-48 bg-[#0f172a] border border-gray-700 rounded-lg shadow-xl overflow-hidden z-60">
+                <div className="absolute top-full left-0 mt-3 w-56 bg-[#0f172a] border border-gray-800 rounded-xl shadow-2xl overflow-hidden z-100 animate-in fade-in zoom-in duration-200">
                   <a 
                     href="/CV_Yhogi_Riswandi.NEW.pdf" 
                     target="_blank" 
-                    className=" px-4 py-3 text-sm text-gray-200 hover:bg-gray-800 border-b border-gray-700 flex items-center gap-2"
+                    className="px-5 py-4 text-sm text-gray-200 hover:bg-gray-800/50 border-b border-gray-800 flex items-center justify-between group"
                   >
-                    <span className="text-red-400 font-bold text-xs uppercase">PDF</span> Lihat / Download
+                    <span>Lihat / Download</span>
+                    <span className="text-red-400 font-bold text-[10px] px-2 py-0.5 bg-red-400/10 rounded uppercase">PDF</span>
                   </a>
                   <a 
                     href="/CV_Yhogi_Riswandi.NEW.docx" 
                     download 
-                    className=" px-4 py-3 text-sm text-gray-200 hover:bg-gray-800 flex items-center gap-2"
+                    className="px-5 py-4 text-sm text-gray-200 hover:bg-gray-800/50 flex items-center justify-between group"
                   >
-                    <span className="text-blue-400 font-bold text-xs uppercase">Word</span> Download DOCX
+                    <span>Download DOCX</span>
+                    <span className="text-blue-400 font-bold text-[10px] px-2 py-0.5 bg-blue-400/10 rounded uppercase">Word</span>
                   </a>
                 </div>
               )}
@@ -202,17 +218,29 @@ function Hero() {
           </div>
         </div>
 
-        <aside className="md:w-1/3 flex flex-col items-center">
+        {/* --- FOTO KANAN --- */}
+        <aside className="md:w-1/3 flex flex-col items-center order-1 md:order-2 mb-10 md:mb-0">
           <div className="relative group">
-            <div className="absolute -inset-1 bg-linear-to-r from-[#38bdf8] to-blue-600 rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
-            <img src={PROFILE.profileImage} alt={PROFILE.name} className="relative w-48 h-48 object-cover rounded-2xl shadow-lg" />
+            {/* Glow Effect */}
+            <div className="absolute -inset-1 bg-linear-to-r from-[#38bdf8] to-blue-600 rounded-3xl blur opacity-20 group-hover:opacity-40 transition duration-1000"></div>
+            
+            <div className="relative w-56 h-56 md:w-64 md:h-64 overflow-hidden rounded-3xl border border-gray-800">
+              <img 
+                src={PROFILE.profileImage} 
+                alt={PROFILE.name} 
+                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" 
+              />
+            </div>
           </div>
-          <div className="text-center mt-6">
-            <h4 className="font-bold text-xl text-white">{PROFILE.name}</h4>
-            <p className="text-[#38bdf8] text-sm font-semibold mb-2">Informatics Engineering</p>
-            <p className="text-gray-400 text-sm font-medium"> </p>
+          
+          <div className="text-center mt-8">
+            <h4 className="font-bold text-2xl text-white tracking-tight">{PROFILE.name}</h4>
+            <p className="text-[#38bdf8] text-sm font-bold uppercase tracking-[0.2em] mt-1">
+              Informatics Engineering
+            </p>
           </div>
         </aside>
+
       </div>
     </section>
   );

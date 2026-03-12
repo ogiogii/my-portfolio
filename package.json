@@ -9,15 +9,21 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@react-three/drei": "^10.7.7",
+    "@react-three/fiber": "^9.5.0",
+    "@react-three/rapier": "^2.2.0",
+    "@types/three": "^0.183.1",
     "docx": "^9.5.1",
     "file-saver": "^2.0.5",
     "framer-motion": "^12.35.1",
     "html2canvas": "^1.4.1",
     "jspdf": "^3.0.4",
     "lucide-react": "^0.575.0",
+    "meshline": "^3.3.1",
     "next": "^16.0.7",
     "react": "^19.2.3",
-    "react-dom": "^19.2.3"
+    "react-dom": "^19.2.3",
+    "three": "^0.183.2"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
